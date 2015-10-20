@@ -25,6 +25,12 @@ angular.module('ui.knob', []).directive('knob', ['$timeout', function($timeout) 
                 }
             });
 
+            $scope.$watch('knobOptions()', function(newValue, oldValue) {
+                if (newValue != oldValue) {
+                    $($element).trigger('configure', newValue);
+                }
+            }, true);
+
             $($element).val($scope.knobData).knob(knobInit);
         }
     };
